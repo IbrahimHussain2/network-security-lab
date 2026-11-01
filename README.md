@@ -9,21 +9,16 @@ I built this to understand how the core layers of network defence actually fit t
 ## Architecture
 
 ```
-                 Internet
-                    |
-          ( VirtualBox NAT )          <-- WAN side
-                    |
-        +-----------------------+
-        |   pfSense firewall    |   em0 = WAN (DHCP)
-        |   + Snort IDS         |   em1 = LAN (192.168.1.1)
-        +-----------------------+
-                    |
-          ( Internal network )         <-- "labnet"
-                    |
-        +-----------------------+
-        |  Ubuntu 24.04 (host)  |   192.168.1.100
-        |  Wireshark + nmap     |
-        +-----------------------+
+   ```mermaid
+flowchart TD
+    NET["Internet"]
+    WAN["VirtualBox NAT (WAN)"]
+    FW["pfSense Firewall + Snort IDS<br/>em0 WAN (DHCP) &nbsp;|&nbsp; em1 LAN 192.168.1.1"]
+    LAN["Internal Network &quot;labnet&quot;"]
+    HOST["Ubuntu 24.04 host<br/>192.168.1.100<br/>Wireshark + nmap"]
+
+    NET --> WAN --> FW --> LAN --> HOST
+
 ```
 
 - **pfSense** sits between the internet and the internal network. Everything to and from the Ubuntu machine passes through it.
