@@ -8,7 +8,7 @@ I built this to understand how the core layers of network defence actually fit t
 
 ## Architecture
 
-```
+
    ```mermaid
 flowchart TD
     NET["Internet"]
@@ -18,8 +18,9 @@ flowchart TD
     HOST["Ubuntu 24.04 host<br/>192.168.1.100<br/>Wireshark + nmap"]
 
     NET --> WAN --> FW --> LAN --> HOST
-
 ```
+
+
 
 - **pfSense** sits between the internet and the internal network. Everything to and from the Ubuntu machine passes through it.
 - The **Ubuntu** VM is the "device on the network". It gets its IP address from pfSense by DHCP and reaches the internet only through the firewall.
